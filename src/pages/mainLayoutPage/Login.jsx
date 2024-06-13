@@ -1,15 +1,38 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import {
+  useCreateUserWithEmailAndPassword,
+  useSendPasswordResetEmail,
+  useSignInWithEmailAndPassword,
+  useUpdateProfile,
+} from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
 import { toast } from "react-toastify";
 import Breadcrumbs from "../../components/maniLayout/Breadcrumbs";
+import { auth } from "../../../firebase.config";
+import { useLocation, useNavigate } from "react-router-dom";
+import LoadingSpinner from "../../components/shared/LoadingSpinner";
+import createAccessToken from "../../utility/createAccessToken";
 
 const Login = () => {
+  const navigate = useNavigate();
+  let location = useLocation();
+  let from = location.state?.from?.pathname || "/";
+
   const [isRegistered, setIsRegistered] = useState(true);
   const [email, setEmail] = useState("");
+  const [displayName, setDisplayName] = useState("");
   const [isDecrypted, setIsDecrypted] = useState(false);
   const [isAgreed, setIsAgreed] = useState(false);
   const [isError, setIsError] = useState("");
+
+  const [createUserWithEmailAndPassword, regUser, regLoading, regError] =
+    useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
+  const [updateProfile, updating, errorProfile] = useUpdateProfile(auth);
+  const [sendPasswordResetEmail, sending, resetError] =
+    useSendPasswordResetEmail(auth);
+  const [signInWithEmailAndPassword, user, loading, error] =
+    useSignInWithEmailAndPassword(auth);
 
   const {
     register,
@@ -18,8 +41,15 @@ const Login = () => {
     reset,
   } = useForm();
   // sdfdfds
-  const onSubmit = (e) => {
-    e.preventDefault();
+  const onSubmit = async (data) => {
+    const { email, name, password } = data || {};
+    if (!isRegistered) {
+      await createUserWithEmailAndPassword(email, password);
+      setDisplayName(name);
+      await updateProfile({ displayName: name });
+    } else {
+      signInWithEmailAndPassword(email, password);
+    }
   };
 
   // get email on blur for reset pass
@@ -30,10 +60,34 @@ const Login = () => {
   const handleResetPass = async () => {
     if (email) {
       console.log(email);
-      // await sendPasswordResetEmail(email);
+      await sendPasswordResetEmail(email);
       toast.success("Email sent successfully");
     }
   };
+
+  // control error
+  useEffect(() => {
+    if (error || regError || resetError) {
+      let message = error?.message || regError?.message || resetError?.message;
+      setIsError(message);
+      setIsAgreed(false);
+      toast.error(message, { id: "error" });
+    }
+  }, [error, regError, resetError]);
+
+  // control user
+  useEffect(() => {
+    if (user || regUser) {
+      const { email } = regUser?.user || user?.user || {};
+      console.log("email", email);
+      createAccessToken(email);
+      navigate(from, { replace: true });
+    }
+  }, [user, regUser, setIsError, from, navigate]);
+
+  if (loading || regLoading) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <div>
@@ -257,7 +311,6 @@ const Login = () => {
                 <span
                   onClick={() => {
                     setIsRegistered(!isRegistered);
-                    setIsAgreed(false);
                     setIsDecrypted(false);
                     reset();
                   }}
@@ -272,7 +325,6 @@ const Login = () => {
                 <span
                   onClick={() => {
                     setIsRegistered(!isRegistered);
-                    setIsAgreed(false);
                     setIsDecrypted(false);
                     reset();
                   }}

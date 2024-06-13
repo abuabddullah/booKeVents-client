@@ -1,8 +1,13 @@
 import React from "react";
 import { Link, Outlet } from "react-router-dom";
 import DashNavs from "../components/maniLayout/DashNavs";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../../firebase.config";
+import LoadingSpinner from "../components/shared/LoadingSpinner";
 
 const MainLayout = () => {
+  const [user, loading] = useAuthState(auth);
+  if (loading) return <LoadingSpinner />;
   return (
     <>
       <div className="drawer lg:drawer-open">
