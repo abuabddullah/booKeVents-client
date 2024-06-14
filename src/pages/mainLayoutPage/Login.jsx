@@ -78,9 +78,10 @@ const Login = () => {
   // control user
   useEffect(() => {
     if (user || regUser) {
-      const { email } = regUser?.user || user?.user || {};
-      console.log("email", email);
-      createAccessToken(email);
+      console.log("user", user);
+      console.log("regUser", regUser);
+      const { email,displayName:name } = regUser?.user || user?.user || {};
+      createAccessToken(email, name);
       navigate(from, { replace: true });
     }
   }, [user, regUser, setIsError, from, navigate]);
