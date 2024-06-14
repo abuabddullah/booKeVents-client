@@ -6,6 +6,7 @@ import Home from "../pages/mainLayoutPage/Home";
 import Login from "../pages/mainLayoutPage/Login";
 import ErrorPage from "../pages/shared/ErrorPage;";
 import Payment from "../components/maniLayout/Payment";
+import MyEvents from "../components/maniLayout/MyEvents";
 
 export const router = createBrowserRouter([
   {
@@ -17,6 +18,11 @@ export const router = createBrowserRouter([
       {
         path: "/eventDetails/:id",
         element: <EventDetails />,
+        errorElement: <ErrorPage />,
+      },
+      {
+        path: "/my-events",
+        element: <MyEvents />,
         errorElement: <ErrorPage />,
       },
       {

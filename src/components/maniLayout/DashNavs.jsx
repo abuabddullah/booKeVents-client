@@ -1,9 +1,9 @@
 import React from "react";
-import { Link, NavLink } from "react-router-dom";
-import CustomNavLink from "../shared/CustomNavLink";
 import { useAuthState, useSignOut } from "react-firebase-hooks/auth";
-import { auth } from "../../../firebase.config";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import { auth } from "../../../firebase.config";
+import CustomNavLink from "../shared/CustomNavLink";
 
 const DashNavs = () => {
   const [user, loading] = useAuthState(auth);
@@ -24,6 +24,9 @@ const DashNavs = () => {
           Home
         </Link>
       </li>
+        <li>
+          <CustomNavLink to="/my-events">My events</CustomNavLink>
+        </li>
       {user ? (
         <li onClick={handleLogOut} className="glass mx-1 hover:underline hover:cursor-pointer btn">
           Logout
