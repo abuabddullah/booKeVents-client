@@ -98,7 +98,7 @@ const Login = () => {
         <Breadcrumbs pageName={"Register"} />
       )}
       <div className="">
-        <div className="md:p-8 lg:w-1/2 mx-auto my-6">
+        <div className="md:p-8 lg:w-2/3 mx-auto my-6">
           <div className="bg-gray-100 rounded-b-lg py-12 px-4">
             <p className="text-center text-sm text-gray-500 font-light">
               {" "}
