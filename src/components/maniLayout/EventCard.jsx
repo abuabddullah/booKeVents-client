@@ -16,7 +16,7 @@ const EventCard = ({ event }) => {
 
         <div className="w-56 -mt-10 overflow-hidden bg-white rounded-lg shadow-lg md:w-64 dark:bg-gray-800">
           <h3 className="py-2 font-bold tracking-wide text-center text-gray-800 uppercase dark:text-white">
-            {event?.title}
+            {event?.title} <br /> <mark>(${event?.price})</mark>
           </h3>
 
           <div className="flex items-center justify-between px-3 py-2 bg-gray-200 dark:bg-gray-700">

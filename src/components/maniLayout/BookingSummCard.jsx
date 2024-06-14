@@ -24,7 +24,9 @@ const BookingSummCard = ({ attendee }) => {
           {" "}
           <div className="flex items-center justify-between">
             {" "}
-            <h1 className="text-gray-600 font-medium">{attendee?.name ? attendee?.name : "Anonymous"}</h1>{" "}
+            <h1 className="text-gray-600 font-medium">
+              {attendee?.name ? attendee?.name : "Anonymous"}
+            </h1>{" "}
             <button className="text-gray-500 hover:text-gray-900">
               {" "}
               <svg
@@ -44,7 +46,18 @@ const BookingSummCard = ({ attendee }) => {
               </svg>{" "}
             </button>{" "}
           </div>{" "}
-          <p className="text-gray-400 text-xs my-1"><small>{attendee?.email}</small></p>{" "}
+          <p className="text-gray-400 text-xs my-1">
+            <small>{attendee?.email}</small>
+          </p>{" "}
+          {attendee?.isPaid ? (
+            <p className="text-green-400 text-xs my-1">
+              <small>Paid</small>
+            </p>
+          ) : (
+            <p className="text-red-400 text-xs my-1">
+              <small>Not Paid</small>
+            </p>
+          )}
         </div>{" "}
       </div>
     </>
