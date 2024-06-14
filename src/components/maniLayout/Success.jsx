@@ -1,15 +1,11 @@
 import axios from "axios";
 import React, { useEffect } from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import { auth } from "../../../firebase.config";
-import confirmEventBooking from "../../utility/confirmEventBooking";
 import successIMg from "./../../assets/images/TRANSACTION SUCCESSFUL.gif";
 const Success = () => {
   const { id, email } = useParams();
-  const { user } = useAuthState(auth);
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   const token = localStorage.getItem("token");
   useEffect(() => {
     try {
@@ -25,10 +21,9 @@ const Success = () => {
         );
         console.log(response.data);
         if (response.data.status == true) {
-          confirmEventBooking(id, user.displayName);
           toast.success(response.data.message);
         } else {
-          navigate("/cancel");
+          navigate("/cancel")
           toast.error(response.data.message);
         }
       };
@@ -36,7 +31,7 @@ const Success = () => {
     } catch (error) {
       console.log(error);
     }
-  }, [id, email, navigate, token]);
+  }, [id, email,navigate,token]);
   return (
     <section className="text-gray-600 body-font">
       <div className="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
