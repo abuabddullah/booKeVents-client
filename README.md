@@ -13,3 +13,4 @@
 - edit booked event by user
 - reject user by admin [bann user]
 - edit event by admin
+- cancel booking by delete booking
