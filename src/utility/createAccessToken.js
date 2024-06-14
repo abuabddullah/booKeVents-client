@@ -2,7 +2,7 @@ const createAccessToken = (email, name) => {
   const currentUser = { email, name };
   console.log("currentUser from frontend",currentUser);
   if (email) {
-    fetch(`http://localhost:5000/api/v1/users`, {
+    fetch(`https://bookevents-server.onrender.com/api/v1/users`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

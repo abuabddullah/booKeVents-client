@@ -14,7 +14,7 @@ const MyEvents = () => {
     try {
       const loadEvents = async () => {
         axios
-          .get("http://localhost:5000/api/v1/my-events", {
+          .get("https://bookevents-server.onrender.com/api/v1/my-events", {
             headers: { Authorization: `Bearer ${token}` },
           })
           .then((res) => {

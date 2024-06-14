@@ -14,7 +14,7 @@ const EventCard = ({ event }) => {
     try {
       const loadPayments = async () => {
         axios
-          .get("http://localhost:5000/api/v1/payments", {
+          .get("https://bookevents-server.onrender.com/api/v1/payments", {
             headers: { Authorization: `Bearer ${token}` },
           })
           .then((res) => {

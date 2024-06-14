@@ -1,14 +1,14 @@
 import { createBrowserRouter } from "react-router-dom";
 import BookNow from "../components/maniLayout/BookNow";
 import EventDetails from "../components/maniLayout/EventDetails";
+import MyEvents from "../components/maniLayout/MyEvents";
+import Payment from "../components/maniLayout/Payment";
+import Success from "../components/maniLayout/Success";
+import ProtectedRoute from "../components/shared/ProtectedRoute";
 import MainLayout from "../layouts/MainLayout";
 import Home from "../pages/mainLayoutPage/Home";
 import Login from "../pages/mainLayoutPage/Login";
 import ErrorPage from "../pages/shared/ErrorPage;";
-import Payment from "../components/maniLayout/Payment";
-import MyEvents from "../components/maniLayout/MyEvents";
-import ProtectedRoute from "../components/shared/ProtectedRoute";
-import Success from "../components/maniLayout/Success";
 
 export const router = createBrowserRouter([
   {
@@ -21,7 +21,7 @@ export const router = createBrowserRouter([
         path: "/eventDetails/:id",
         element: <EventDetails />,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/api/v1/events/${params.id}`),
+          fetch(`https://bookevents-server.onrender.com/api/v1/events/${params.id}`),
         errorElement: <ErrorPage />,
       },
       {

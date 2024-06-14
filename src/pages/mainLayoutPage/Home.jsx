@@ -11,7 +11,7 @@ const Home = () => {
   // Fetch events from the server
   useEffect(() => {
     try {
-      /* fetch("http://localhost:5000/api/v1/events")
+      /* fetch("https://bookevents-server.onrender.com/api/v1/events")
         .then((res) => res.json())
         .then((data) => {
           setEvents(data);
@@ -19,7 +19,7 @@ const Home = () => {
         }); */
       const loadEvents = async () => {
         axios
-          .get("http://localhost:5000/api/v1/events")
+          .get("https://bookevents-server.onrender.com/api/v1/events")
           .then((res) => {
             setEvents(res.data);
             setLoading4Events(false);
