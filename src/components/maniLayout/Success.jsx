@@ -37,12 +37,11 @@ const Success = () => {
           />
         </div>
         <div className="lg:flex-grow md:w-1/2 lg:pl-24 md:pl-16 flex flex-col md:items-start md:text-left items-center text-center">
-          <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">
-            Oops! Something Went Wrong
+          <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium text-green-500">
+            Transaction Successfull
           </h1>
           <p className="mb-8 leading-relaxed">
-            Something went wrong on our end. Our team has been notified and is
-            working on a fix.
+            Thank you for being with us. For trusting us. We work for your betterment. Be with us. Appriciate Us.
           </p>
           <div className="flex justify-center">
             <Link to="/">
