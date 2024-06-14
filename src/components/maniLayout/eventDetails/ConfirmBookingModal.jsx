@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../../../../firebase.config";
 import { useAuthState } from "react-firebase-hooks/auth";
+import confirmEventBooking from "../../../utility/confirmEventBooking";
 
 const ConfirmBookingModal = ({ eventData }) => {
   const [user, loading] = useAuthState(auth);
@@ -11,16 +12,15 @@ const ConfirmBookingModal = ({ eventData }) => {
 
   const handleConfirmBooking = (e) => {
     e.preventDefault();
-    const username = e.target.username.value;
-    console.log(username);
     const isConfirmed = confirm("Are you sure you want to book this event?");
     if (isConfirmed) {
+      confirmEventBooking(eventData?._id, user.displayName);
       if (!eventData?.price) {
         alert("Booking Confirmed!");
       } else if (eventData?.price) {
         alert(`Booking Confirmed! You will be charged ${eventData?.price}`);
-        navigate(`/payment/${eventData?._id}`);
       }
+      navigate(`/payment/${eventData?._id}`);
     } else {
       alert("Booking Cancelled!");
     }
