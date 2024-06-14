@@ -7,10 +7,10 @@ import {
 } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
-import { toast } from "react-toastify";
-import Breadcrumbs from "../../components/maniLayout/Breadcrumbs";
-import { auth } from "../../../firebase.config";
 import { useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { auth } from "../../../firebase.config";
+import Breadcrumbs from "../../components/maniLayout/Breadcrumbs";
 import LoadingSpinner from "../../components/shared/LoadingSpinner";
 import createAccessToken from "../../utility/createAccessToken";
 
@@ -80,8 +80,8 @@ const Login = () => {
     if (user || regUser) {
       console.log("user", user);
       console.log("regUser", regUser);
-      const { email,displayName:name } = regUser?.user || user?.user || {};
-      createAccessToken(email, name);
+      const { email,displayName } = regUser?.user || user?.user || {};
+      createAccessToken(email, displayName);
       navigate(from, { replace: true });
     }
   }, [user, regUser, setIsError, from, navigate]);

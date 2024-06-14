@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../../../../firebase.config";
 import { useAuthState } from "react-firebase-hooks/auth";
 import confirmEventBooking from "../../../utility/confirmEventBooking";
@@ -30,7 +30,18 @@ const ConfirmBookingModal = ({ eventData }) => {
   };
   return (
     <>
-      <button
+      {
+        !user ? (<>
+        <Link to="/login">
+        <button
+        className="text-white py-2 px-4 uppercase rounded bg-green-600 hover:bg-lime-700 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5"
+      >
+        {" "}
+        Login <br />& <br /> Book Now{" "}
+      </button>
+        </Link>
+        </>) : (
+          <button
         type="submit"
         className="text-white py-2 px-4 uppercase rounded bg-green-600 hover:bg-lime-700 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5"
         onClick={() => document.getElementById("my_modal_3").showModal()}
@@ -38,6 +49,8 @@ const ConfirmBookingModal = ({ eventData }) => {
         {" "}
         Book Now{" "}
       </button>
+        )
+      }
 
       <dialog id="my_modal_3" className="modal">
         <div className="modal-box">

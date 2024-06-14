@@ -1,5 +1,6 @@
 const createAccessToken = (email, name) => {
   const currentUser = { email, name };
+  console.log("currentUser from frontend",currentUser);
   if (email) {
     fetch(`http://localhost:5000/api/v1/users`, {
       method: "POST",
