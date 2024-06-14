@@ -179,14 +179,14 @@ const Login = () => {
                   </svg>
                 </div>
                 <label className="label">
-                  {errors.email?.type === "required" && (
+                  {errors?.email?.type === "required" && (
                     <span className="label-text-alt text-red-500">
-                      {errors.email.message}
+                      {errors?.email.message}
                     </span>
                   )}
-                  {errors.email?.type === "pattern" && (
+                  {errors?.email?.type === "pattern" && (
                     <span className="label-text-alt text-red-500">
-                      {errors.email.message}
+                      {errors?.email.message}
                     </span>
                   )}
                 </label>

@@ -20,8 +20,8 @@ const EventCard = ({ event }) => {
           .then((res) => {
             res.data.forEach((payment) => {
               if (
-                payment.email === user.email &&
-                payment.eventID === event._id
+                payment?.email === user?.email &&
+                payment?.eventID === event?._id
               ) {
                 setIsPaid(true);
               }
@@ -35,7 +35,7 @@ const EventCard = ({ event }) => {
     } catch (error) {
       console.log(error);
     }
-  }, [event._id, token, user.email]);
+  }, [event._id, token, user?.email]);
 
   return (
     <>
