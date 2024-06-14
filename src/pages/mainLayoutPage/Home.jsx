@@ -3,20 +3,27 @@ import Breadcrumbs from "../../components/maniLayout/Breadcrumbs";
 import EventCard from "../../components/maniLayout/EventCard";
 import SectionHeadline from "../../components/shared/SectionHeadline";
 import axios from "axios";
+import LoadingSpinner from "../../components/shared/LoadingSpinner";
 
 const Home = () => {
   const [events, setEvents] = useState([]);
+  const [loading4Events, setLoading4Events] = useState(true);
   // Fetch events from the server
   useEffect(() => {
     axios
       .get("http://localhost:5000/api/v1/events")
       .then((res) => {
         setEvents(res.data);
+        setLoading4Events(false);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
+
+  if (loading4Events) {
+    return <LoadingSpinner />;
+  }
   return (
     <>
       <Breadcrumbs pageName={"Home - Events"} />

@@ -4,10 +4,16 @@ import SectionHeadline from "../shared/SectionHeadline";
 import BookingSummCard from "./BookingSummCard";
 import Breadcrumbs from "./Breadcrumbs";
 import ConfirmBookingModal from "./eventDetails/ConfirmBookingModal";
+import LoadingSpinner from "../shared/LoadingSpinner";
 
 const EventDetails = () => {
   const eventData = useLoaderData();
-  console.log(eventData);
+
+  
+  // set loading if event data not got yet
+  if (!eventData) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <>
@@ -36,7 +42,11 @@ const EventDetails = () => {
                 <div className="leading-relaxed">
                   Price:{" "}
                   <strong>
-                    {eventData?.price ? eventData?.price : <span className="text-green-600">Free</span>}
+                    {eventData?.price ? (
+                      eventData?.price
+                    ) : (
+                      <span className="text-green-600">Free</span>
+                    )}
                   </strong>
                 </div>
               </div>
@@ -68,7 +78,7 @@ const EventDetails = () => {
                 <div className="flex items-center justify-center my-8">
                   {/* You can open the modal using document.getElementById('ID').showModal() method */}
 
-                  <ConfirmBookingModal eventData={eventData}/>
+                  <ConfirmBookingModal eventData={eventData} />
                 </div>
               </div>
             </div>
@@ -108,56 +118,3 @@ const EventDetails = () => {
 };
 
 export default EventDetails;
-
-{
-  /* <section
-          className="text-gray-600 body-font 
-         md:col-start-1 md:col-end-10"
-        >
-          <div className="px-5 py-24 mx-auto flex flex-wrap">
-            <div className="flex flex-wrap -mx-4 mt-auto mb-auto lg:w-1/2 sm:w-2/3 content-start sm:pr-10">
-              <div className="w-full sm:p-4 px-4 mb-6">
-                <h1 className="title-font font-medium text-xl mb-2 text-gray-900">
-                  {event?.title}
-                </h1>
-                <div className="leading-relaxed">{event?.description}</div>
-              </div>
-              <div className="p-4 sm:w-1/2 lg:w-1/4 w-1/2">
-                <h2 className="title-font font-medium text-3xl text-gray-900">
-                  {event?.bookings?.length}
-                </h2>
-                <p className="leading-relaxed">Bookings</p>
-              </div>
-              <div className="p-4 sm:w-1/2 lg:w-1/4 w-1/2">
-                <h2 className="title-font font-medium text-3xl text-gray-900">
-                  1.8K
-                </h2>
-                <p className="leading-relaxed">Graduates</p>
-              </div>
-              <div className="p-4 sm:w-1/2 lg:w-1/4 w-1/2">
-                <h2 className="title-font font-medium text-3xl text-gray-900">
-                  35
-                </h2>
-                <p className="leading-relaxed">Successful Candidates</p>
-              </div>
-              <div className="p-4 sm:w-1/2 lg:w-1/4 w-1/2">
-                <h2 className="title-font font-medium text-3xl text-gray-900">
-                  4
-                </h2>
-                <p className="leading-relaxed">Certified Members</p>
-              </div>
-            </div>
-            <div className="lg:w-1/2 sm:w-1/3 w-full rounded-lg overflow-hidden mt-6 sm:mt-0">
-              <img
-                className="object-cover object-center w-full h-full"
-                src={
-                  event?.image
-                    ? event?.image
-                    : "https://i.ibb.co/x1Kc5d3/cover.png"
-                }
-                alt="stats"
-              />
-            </div>
-          </div>
-        </section> */
-}
