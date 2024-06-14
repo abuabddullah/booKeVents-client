@@ -14,13 +14,15 @@ const ConfirmBookingModal = ({ eventData }) => {
     e.preventDefault();
     const isConfirmed = confirm("Are you sure you want to book this event?");
     if (isConfirmed) {
-      confirmEventBooking(eventData?._id, user.displayName);
       if (!eventData?.price) {
+        confirmEventBooking(eventData?._id, user.displayName);
         alert("Booking Confirmed!");
       } else if (eventData?.price) {
-        alert(`Booking Confirmed! You will be charged ${eventData?.price}`);
+        alert(
+          `Pay for Confirming Booking! You will be charged ${eventData?.price}`
+        );
+        navigate(`/payment/${eventData?._id}`);
       }
-      navigate(`/payment/${eventData?._id}`);
     } else {
       alert("Booking Cancelled!");
     }
@@ -30,27 +32,25 @@ const ConfirmBookingModal = ({ eventData }) => {
   };
   return (
     <>
-      {
-        !user ? (<>
-        <Link to="/login">
+      {!user ? (
+        <>
+          <Link to="/login">
+            <button className="text-white py-2 px-4 uppercase rounded bg-green-600 hover:bg-lime-700 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5">
+              {" "}
+              Login <br />& <br /> Book Now{" "}
+            </button>
+          </Link>
+        </>
+      ) : (
         <button
-        className="text-white py-2 px-4 uppercase rounded bg-green-600 hover:bg-lime-700 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5"
-      >
-        {" "}
-        Login <br />& <br /> Book Now{" "}
-      </button>
-        </Link>
-        </>) : (
-          <button
-        type="submit"
-        className="text-white py-2 px-4 uppercase rounded bg-green-600 hover:bg-lime-700 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5"
-        onClick={() => document.getElementById("my_modal_3").showModal()}
-      >
-        {" "}
-        Book Now{" "}
-      </button>
-        )
-      }
+          type="submit"
+          className="text-white py-2 px-4 uppercase rounded bg-green-600 hover:bg-lime-700 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5"
+          onClick={() => document.getElementById("my_modal_3").showModal()}
+        >
+          {" "}
+          Book Now{" "}
+        </button>
+      )}
 
       <dialog id="my_modal_3" className="modal">
         <div className="modal-box">

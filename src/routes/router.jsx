@@ -8,6 +8,7 @@ import ErrorPage from "../pages/shared/ErrorPage;";
 import Payment from "../components/maniLayout/Payment";
 import MyEvents from "../components/maniLayout/MyEvents";
 import ProtectedRoute from "../components/shared/ProtectedRoute";
+import Success from "../components/maniLayout/Success";
 
 export const router = createBrowserRouter([
   {
@@ -51,8 +52,8 @@ export const router = createBrowserRouter([
   },
 
   {
-    path: "/register",
-    // element: <Register />,
-    // errorElement: <ErrorPage />,
+    path: "/success/:id/:email",
+    element: <Success />,
+    errorElement: <ErrorPage />,
   },
 ]);
