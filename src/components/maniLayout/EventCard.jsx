@@ -66,29 +66,19 @@ const EventCard = ({ event }) => {
             </span>
           </div>
           <div className="flex items-center justify-center px-3 py-2 dark:bg-gray-700">
-            {
-              // if location.pathname includes '/my-events' then show a button to redirect to payment page holding id or show see details button
-              location.pathname.includes("/my-events") && isPaid == false ? (
-                <>
-                  {event?.price != 0 && (
-                    <Link to={`/payment/${event?._id}`}>
-                      <button className="px-2 py-1 text-xs font-semibold text-white uppercase transition-colors duration-300 transform bg-gray-800 rounded hover:bg-gray-700 dark:hover:bg-gray-600 focus:bg-gray-700 dark:focus:bg-gray-600 focus:outline-none mx-2">
-                        Pay <br /> Now
-                      </button>
-                    </Link>
-                  )}
-                  <button className="px-2 py-1 text-xs font-semibold text-white uppercase transition-colors duration-300 transform bg-red-800 rounded hover:bg-red-700 dark:hover:bg-red-600 focus:bg-red-700 dark:focus:bg-red-600 focus:outline-none mx-2">
-                    Cancel <br /> Booking
-                  </button>
-                </>
-              ) : (
-                <Link to={`/eventDetails/${event?._id}`}>
-                  <button className="px-2 py-1 text-xs font-semibold text-white uppercase transition-colors duration-300 transform bg-gray-800 rounded hover:bg-gray-700 dark:hover:bg-gray-600 focus:bg-gray-700 dark:focus:bg-gray-600 focus:outline-none">
-                    See Details
-                  </button>
-                </Link>
-              )
-            }
+            <Link to={`/payment/${event?._id}`}>
+              <button className="px-2 py-1 text-xs font-semibold text-white uppercase transition-colors duration-300 transform bg-gray-800 rounded hover:bg-gray-700 dark:hover:bg-gray-600 focus:bg-gray-700 dark:focus:bg-gray-600 focus:outline-none mx-2">
+                Pay <br /> Now
+              </button>
+            </Link>
+            <button className="px-2 py-1 text-xs font-semibold text-white uppercase transition-colors duration-300 transform bg-red-800 rounded hover:bg-red-700 dark:hover:bg-red-600 focus:bg-red-700 dark:focus:bg-red-600 focus:outline-none mx-2">
+              Cancel <br /> Booking
+            </button>
+            <Link to={`/eventDetails/${event?._id}`}>
+              <button className="px-2 py-1 text-xs font-semibold text-white uppercase transition-colors duration-300 transform bg-gray-800 rounded hover:bg-gray-700 dark:hover:bg-gray-600 focus:bg-gray-700 dark:focus:bg-gray-600 focus:outline-none">
+                See Details
+              </button>
+            </Link>
           </div>
         </div>
       </div>
