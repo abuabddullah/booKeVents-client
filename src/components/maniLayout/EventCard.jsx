@@ -1,17 +1,20 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 const EventCard = ({ event }) => {
+  const location = useLocation();
   return (
     <>
       <div className="flex flex-col items-center justify-center w-full max-w-sm mx-auto">
         <div
           className={`w-full h-64 bg-gray-300 bg-center bg-cover rounded-lg shadow-md`}
         >
-            <img
-                src={event?.image ? event?.image : "https://i.ibb.co/x1Kc5d3/cover.png"}
-                alt="event"
-                className="w-full h-full rounded-lg"
-            />
+          <img
+            src={
+              event?.image ? event?.image : "https://i.ibb.co/x1Kc5d3/cover.png"
+            }
+            alt="event"
+            className="w-full h-full rounded-lg"
+          />
         </div>
 
         <div className="w-56 -mt-10 overflow-hidden bg-white rounded-lg shadow-lg md:w-64 dark:bg-gray-800">
@@ -28,11 +31,23 @@ const EventCard = ({ event }) => {
             </span>
           </div>
           <div className="flex items-center justify-center px-3 py-2 dark:bg-gray-700">
-            <Link to={`/eventDetails/${event?._id}`}>
-              <button className="px-2 py-1 text-xs font-semibold text-white uppercase transition-colors duration-300 transform bg-gray-800 rounded hover:bg-gray-700 dark:hover:bg-gray-600 focus:bg-gray-700 dark:focus:bg-gray-600 focus:outline-none">
-                See Details
-              </button>
-            </Link>
+            {
+              // if location.pathname includes '/my-events' then show a button to redirect to payment page holding id or show see details button
+              location.pathname.includes("/my-events") ? (
+                <Link
+                  to={`/payment/${event?._id}`}
+                  className="px-2 py-1 text-xs font-semibold text-white uppercase transition-colors duration-300 transform bg-gray-800 rounded hover:bg-gray-700 dark:hover:bg-gray-600 focus:bg-gray-700 dark:focus:bg-gray-600 focus:outline-none"
+                >
+                  Pay Now
+                </Link>
+              ) : (
+                <Link to={`/eventDetails/${event?._id}`}>
+                  <button className="px-2 py-1 text-xs font-semibold text-white uppercase transition-colors duration-300 transform bg-gray-800 rounded hover:bg-gray-700 dark:hover:bg-gray-600 focus:bg-gray-700 dark:focus:bg-gray-600 focus:outline-none">
+                    See Details
+                  </button>
+                </Link>
+              )
+            }
           </div>
         </div>
       </div>
