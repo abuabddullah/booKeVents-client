@@ -1,9 +1,11 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { auth } from "../../../../firebase.config";
+import { useAuthState } from "react-firebase-hooks/auth";
 
-const ConfirmBookingModal = ({eventData}) => {
-    const navigate = useNavigate();
-
+const ConfirmBookingModal = ({ eventData }) => {
+  const [user, loading] = useAuthState(auth);
+  const navigate = useNavigate();
 
   // handleConfirmBooking
 
@@ -50,7 +52,7 @@ const ConfirmBookingModal = ({eventData}) => {
             <>
               <section className="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md dark:bg-gray-800">
                 <h2 className="text-lg font-semibold text-gray-500 capitalize dark:text-white">
-                  Booking Details
+                  <small>Book : {eventData?._id}</small>
                 </h2>
 
                 <form
@@ -69,6 +71,8 @@ const ConfirmBookingModal = ({eventData}) => {
                         id="username"
                         type="text"
                         className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                        value={user?.displayName}
+                        disabled
                       />
                     </div>
 
@@ -83,34 +87,56 @@ const ConfirmBookingModal = ({eventData}) => {
                         id="emailAddress"
                         type="email"
                         className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                        value={user?.email}
+                        disabled
                       />
                     </div>
 
                     <div>
                       <label
                         className="text-gray-700 dark:text-gray-200"
-                        htmlFor="password"
+                        htmlFor="price"
                       >
-                        Password
+                        Price
                       </label>
                       <input
-                        id="password"
-                        type="password"
+                        id="price"
+                        type="price"
                         className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                        value={eventData?.price}
+                        disabled
                       />
                     </div>
 
                     <div>
                       <label
                         className="text-gray-700 dark:text-gray-200"
-                        htmlFor="passwordConfirmation"
+                        htmlFor="eventDate"
                       >
-                        Password Confirmation
+                        Event Date
                       </label>
                       <input
-                        id="passwordConfirmation"
-                        type="password"
+                        id="eventDate"
+                        type="date"
                         className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                        value={eventData?.date}
+                        disabled
+                      />
+                    </div>
+
+                    <div>
+                      <label
+                        className="text-gray-700 dark:text-gray-200"
+                        htmlFor="eventTime"
+                      >
+                        Event Time
+                      </label>
+                      <input
+                        id="eventTime"
+                        type="time"
+                        className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                        value={eventData?.time}
+                        disabled
                       />
                     </div>
                   </div>

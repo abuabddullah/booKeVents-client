@@ -1,24 +1,37 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Breadcrumbs from "../../components/maniLayout/Breadcrumbs";
 import EventCard from "../../components/maniLayout/EventCard";
-import SectionHeadline from "../../components/shared/SectionHeadline";
-import axios from "axios";
 import LoadingSpinner from "../../components/shared/LoadingSpinner";
+import SectionHeadline from "../../components/shared/SectionHeadline";
 
 const Home = () => {
   const [events, setEvents] = useState([]);
   const [loading4Events, setLoading4Events] = useState(true);
   // Fetch events from the server
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/api/v1/events")
-      .then((res) => {
-        setEvents(res.data);
-        setLoading4Events(false);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    try {
+      /* fetch("http://localhost:5000/api/v1/events")
+        .then((res) => res.json())
+        .then((data) => {
+          setEvents(data);
+          setLoading4Events(false);
+        }); */
+      const loadEvents = async () => {
+        axios
+          .get("http://localhost:5000/api/v1/events")
+          .then((res) => {
+            setEvents(res.data);
+            setLoading4Events(false);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      };
+      loadEvents();
+    } catch (error) {
+      console.log(error);
+    }
   }, []);
 
   if (loading4Events) {

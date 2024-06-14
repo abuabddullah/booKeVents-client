@@ -11,17 +11,24 @@ const MyEvents = () => {
   const token = localStorage.getItem("token");
   // Fetch events from the server based on user email wich will passed through the token
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/api/v1/my-events", {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((res) => {
-        setEvents(res.data);
-        setLoading4Events(false);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    try {
+      const loadEvents = async () => {
+        axios
+          .get("http://localhost:5000/api/v1/my-events", {
+            headers: { Authorization: `Bearer ${token}` },
+          })
+          .then((res) => {
+            setEvents(res.data);
+            setLoading4Events(false);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      };
+      loadEvents();
+    } catch (error) {
+      console.log(error);
+    }
   }, []);
 
   if (loading4Events) {
