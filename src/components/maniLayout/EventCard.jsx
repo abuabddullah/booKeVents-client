@@ -1,41 +1,7 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
+import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import { auth } from "../../../firebase.config";
 const EventCard = ({ event }) => {
-  const [user, loading] = useAuthState(auth);
-  const [isPaid, setIsPaid] = useState(false);
   const location = useLocation();
-  const token = localStorage.getItem("token");
-
-  // fetch all pay ments and check if user and event._id if match with any payment[index].email && .eventID then show cancel booking button
-  useEffect(() => {
-    try {
-      const loadPayments = async () => {
-        axios
-          .get("https://bookevents-server.onrender.com/api/v1/payments", {
-            headers: { Authorization: `Bearer ${token}` },
-          })
-          .then((res) => {
-            res.data.forEach((payment) => {
-              if (
-                payment?.email === user?.email &&
-                payment?.eventID === event?._id
-              ) {
-                setIsPaid(true);
-              }
-            });
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      };
-      loadPayments();
-    } catch (error) {
-      console.log(error);
-    }
-  }, [event._id, token, user?.email]);
 
   return (
     <>
