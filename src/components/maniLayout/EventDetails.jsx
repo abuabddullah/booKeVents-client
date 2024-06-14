@@ -1,30 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import SectionHeadline from "../shared/SectionHeadline";
 import BookingSummCard from "./BookingSummCard";
 import Breadcrumbs from "./Breadcrumbs";
 
 const EventDetails = () => {
-  const {id}= useParams();
+  const eventData = useLoaderData();
   const navigate = useNavigate();
-  const [event, setEvent] = useState({}); //[event,setEvent
-  const eventDemo = {
-    _id: 1,
-    title: "Event Title",
-    date: "12/12/21",
-    time: "12:00 PM",
-    location: "Event Location",
-    price: 1000,
-    description: "Event Description",
-    image: "https://i.ibb.co/x1Kc5d3/cover.png",
-    bookings: [
-      { name: "John Doe", email: "dff", phone: "1234567890" },
-      { name: "Jane Doe", email: "dff", phone: "1234567890" },
-      { name: "John Doe", email: "dff", phone: "1234567890" },
-    ],
-  };
   useEffect(() => {
-    setEvent(eventDemo);
+    console.log(eventData);
   }, []);
 
   const handleConfirmBooking = (e) => {
@@ -33,11 +17,11 @@ const EventDetails = () => {
     console.log(username);
     const isConfirmed = confirm("Are you sure you want to book this event?");
     if (isConfirmed) {
-      if (!event?.price) {
+      if (!eventData?.price) {
         alert("Booking Confirmed!");
-      } else if (event?.price) {
-        alert(`Booking Confirmed! You will be charged ${event?.price}`);
-        navigate(`/payment/${event?._id}`);
+      } else if (eventData?.price) {
+        alert(`Booking Confirmed! You will be charged ${eventData?.price}`);
+        navigate(`/payment/${eventData?._id}`);
       }
     } else {
       alert("Booking Cancelled!");
@@ -49,7 +33,7 @@ const EventDetails = () => {
 
   return (
     <>
-      <Breadcrumbs pageName={`Event Details / ${event?._id}`} />
+      <Breadcrumbs pageName={`Event Details / ${eventData?._id}`} />
       <SectionHeadline
         secTitle="Event Details"
         secSubTitle="Check out the event details"
@@ -66,16 +50,21 @@ const EventDetails = () => {
             <div className="flex flex-wrap -mx-4 mt-auto mb-auto lg:w-1/2 sm:w-2/3 content-start sm:pr-10">
               <div className="w-full sm:p-4 px-4 mb-6">
                 <h1 className="title-font font-medium text-xl mb-2 text-gray-900">
-                  {event?.title}
+                  {eventData?.title}
                 </h1>
-                <div className="leading-relaxed my-4">{event?.description}</div>
+                <div className="leading-relaxed my-4">
+                  {eventData?.description}
+                </div>
                 <div className="leading-relaxed">
-                  Price: <strong>{event?.price ? event?.price : "Free"}</strong>
+                  Price:{" "}
+                  <strong>
+                    {eventData?.price ? eventData?.price : "Free"}
+                  </strong>
                 </div>
               </div>
               <div className="p-4 sm:w-1/2 w-1/2">
                 <h2 className="title-font font-medium text-3xl text-gray-900">
-                  {event?.bookings?.length}
+                  {eventData?.bookings?.length}
                 </h2>
                 <p className="leading-relaxed">Bookings</p>
               </div>
@@ -217,8 +206,8 @@ const EventDetails = () => {
               <img
                 className="object-cover object-center w-full h-full"
                 src={
-                  event?.image
-                    ? event?.image
+                  eventData?.image
+                    ? eventData?.image
                     : "https://i.ibb.co/x1Kc5d3/cover.png"
                 }
                 alt="stats"
@@ -235,9 +224,9 @@ const EventDetails = () => {
           <div className="px-5 py-4 mx-auto flex flex-wrap gap-4 md:h-96 md:overflow-hidden md:overflow-y-scroll">
             {
               // Array of bookings
-              event?.bookings?.map((booking, index) => (
+              eventData?.attendees?.map((attendee, index) => (
                 <>
-                  <BookingSummCard key={index} booking={booking} />
+                  <BookingSummCard key={index} attendee={attendee} />
                 </>
               ))
             }

@@ -1,56 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Breadcrumbs from "../../components/maniLayout/Breadcrumbs";
 import EventCard from "../../components/maniLayout/EventCard";
 import SectionHeadline from "../../components/shared/SectionHeadline";
+import axios from "axios";
 
 const Home = () => {
-  const events = [
-    {
-      _id: 1,
-      title: "Event Title",
-      date: "12/12/21",
-      time: "12:00 PM",
-      image: "https://i.ibb.co/x1Kc5d3/cover.png",
-    //   location: "Event Location",
-    //   description: "Event Description",
-    },
-    {
-      _id: 1,
-      title: "Event Title",
-      date: "12/12/21",
-      time: "12:00 PM",
-      image: "https://i.ibb.co/x1Kc5d3/cover.png",
-    //   location: "Event Location",
-    //   description: "Event Description",
-    },
-    {
-      _id: 1,
-      title: "Event Title",
-      date: "12/12/21",
-      time: "12:00 PM",
-      image: "https://i.ibb.co/x1Kc5d3/cover.png",
-    //   location: "Event Location",
-    //   description: "Event Description",
-    },
-    {
-      _id: 1,
-      title: "Event Title",
-      date: "12/12/21",
-      time: "12:00 PM",
-      image: "https://i.ibb.co/x1Kc5d3/cover.png",
-    //   location: "Event Location",
-    //   description: "Event Description",
-    },
-    {
-      _id: 1,
-      title: "Event Title",
-      date: "12/12/21",
-      time: "12:00 PM",
-      image: "https://i.ibb.co/x1Kc5d3/cover.png",
-    //   location: "Event Location",
-    //   description: "Event Description",
-    },
-  ];
+  const [events, setEvents] = useState([]);
+  // Fetch events from the server
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/api/v1/events")
+      .then((res) => {
+        setEvents(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
   return (
     <>
       <Breadcrumbs pageName={"Home - Events"} />

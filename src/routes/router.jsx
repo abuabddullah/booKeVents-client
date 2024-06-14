@@ -19,6 +19,8 @@ export const router = createBrowserRouter([
       {
         path: "/eventDetails/:id",
         element: <EventDetails />,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/api/v1/events/${params.id}`),
         errorElement: <ErrorPage />,
       },
       {

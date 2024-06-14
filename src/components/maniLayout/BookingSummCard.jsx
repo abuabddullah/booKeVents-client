@@ -1,9 +1,9 @@
 import React from "react";
 
-const BookingSummCard = ({booking}) => {
+const BookingSummCard = ({ attendee }) => {
   return (
     <>
-      <div className="md:w-80 w-full bg-white shadow rounded border border-transparent hover:border-blue-500 cursor-pointer">
+      <div className="w-full overflow-hidden bg-white shadow rounded border border-transparent hover:border-blue-500 cursor-pointer">
         {" "}
         <div className="h-48 w-full checker-bg flex items-center justify-center p-4 text-blue-500">
           <div className="avatar">
@@ -11,8 +11,8 @@ const BookingSummCard = ({booking}) => {
               <img
                 className="object-cover object-center w-full h-full"
                 src={
-                  booking?.image
-                    ? booking?.image
+                  attendee?.image
+                    ? attendee?.image
                     : "https://i.ibb.co/x1Kc5d3/cover.png"
                 }
                 alt="stats"
@@ -24,7 +24,7 @@ const BookingSummCard = ({booking}) => {
           {" "}
           <div className="flex items-center justify-between">
             {" "}
-            <h1 className="text-gray-600 font-medium">{booking?.name}</h1>{" "}
+            <h1 className="text-gray-600 font-medium">{attendee?.name ? attendee?.name : "Anonymous"}</h1>{" "}
             <button className="text-gray-500 hover:text-gray-900">
               {" "}
               <svg
@@ -44,7 +44,7 @@ const BookingSummCard = ({booking}) => {
               </svg>{" "}
             </button>{" "}
           </div>{" "}
-          <p className="text-gray-400 text-sm my-1">{booking?.email}</p>{" "}
+          <p className="text-gray-400 text-xs my-1"><small>{attendee?.email}</small></p>{" "}
         </div>{" "}
       </div>
     </>
