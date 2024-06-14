@@ -47,7 +47,7 @@ const Home = () => {
       <div className="grid md:grid-cols-3 gap-6">
         {
           // Array of events
-          events.map((event, index) => (
+          events?.map((event, index) => (
             <EventCard key={index} event={event} />
           ))
         }
