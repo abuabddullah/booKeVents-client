@@ -53,7 +53,7 @@ const MainLayout = () => {
             {/* Sidebar content here */}
             <div>
               <Link to="/">
-                <span className="ml-3">Boo Ke Vents</span>
+                <span className="ml-3"><span className="text-black-400 text-3xl font-bold">Boo</span> <span className="text-rose-500 font-semibold text-xl">Ke</span> <span className="text-black-400 text-3xl font-bold">Vents</span></span>
               </Link>
             </div>
             <DashNavs />
