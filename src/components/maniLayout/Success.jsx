@@ -11,7 +11,7 @@ const Success = () => {
     try {
       const postPayment = async () => {
         const response = await axios.patch(
-          `https://bookevents-server.onrender.com/api/v1/events/payment-succcess/${id}`,
+          `http://localhost:5000/api/v1/events/payment-succcess/${id}`,
           {},
           {
             headers: {

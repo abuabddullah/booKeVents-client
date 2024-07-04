@@ -4,6 +4,7 @@ import LoadingSpinner from "../shared/LoadingSpinner";
 import SectionHeadline from "../shared/SectionHeadline";
 import Breadcrumbs from "./Breadcrumbs";
 import EventCard from "./EventCard";
+import MyEventsTable from "../my-events/MyEventsTable";
 
 const MyEvents = () => {
   const [events, setEvents] = useState([]);
@@ -14,7 +15,7 @@ const MyEvents = () => {
     try {
       const loadEvents = async () => {
         axios
-          .get("https://bookevents-server.onrender.com/api/v1/my-events", {
+          .get("http://localhost:5000/api/v1/my-events", {
             headers: { Authorization: `Bearer ${token}` },
           })
           .then((res) => {
@@ -39,13 +40,8 @@ const MyEvents = () => {
     <>
       <Breadcrumbs pageName={"My Events"} />
       <SectionHeadline secTitle="My Events" secSubTitle="" />
-      <div className="grid md:grid-cols-3 gap-6">
-        {
-          // Array of events
-          events?.map((event, index) => (
-            <EventCard key={index} event={event} />
-          ))
-        }
+      <div className="">
+        <MyEventsTable events={events} />
       </div>
     </>
   );
