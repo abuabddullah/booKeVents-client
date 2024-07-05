@@ -22,7 +22,7 @@ export const router = createBrowserRouter([
         path: "/eventDetails/:id",
         element: <EventDetails />,
         loader: ({ params }) =>
-          fetch(`https://bookevents-server.onrender.com/events/${params.id}`),
+          fetch(`https://bookevents-server.onrender.com/api/v1/events/${params.id}`),
         errorElement: <ErrorPage />,
       },
       {

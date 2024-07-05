@@ -11,7 +11,7 @@ const MyEventsTable = ({ events }) => {
     // navigate(`/payment/${id}`);
     try {
       const response = await axios.post(
-        `https://bookevents-server.onrender.com/events/pay-event/${id}`,
+        `https://bookevents-server.onrender.com/api/v1/events/pay-event/${id}`,
         {},
         {
           headers: {
