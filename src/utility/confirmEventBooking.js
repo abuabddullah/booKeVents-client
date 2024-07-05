@@ -5,7 +5,7 @@ const confirmEventBooking = (eventID, name) => {
   const currentUser = { name };
   if (eventID) {
     try {
-      fetch(`http://localhost:5000/api/v1/events/book-event/${eventID}`, {
+      fetch(`https://bookevents-server.onrender.com/events/book-event/${eventID}`, {
         method: "POST",
         headers: {
           "content-type": "application/json",

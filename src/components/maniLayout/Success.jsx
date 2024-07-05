@@ -4,15 +4,15 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import successIMg from "./../../assets/images/TRANSACTION SUCCESSFUL.gif";
 const Success = () => {
-  const { id, email } = useParams();
-  const navigate = useNavigate()
+  const { transactionId, id } = useParams();
+  const navigate = useNavigate();
   const token = localStorage.getItem("token");
   useEffect(() => {
     try {
       const postPayment = async () => {
         const response = await axios.patch(
-          `http://localhost:5000/api/v1/events/payment-succcess/${id}`,
-          {},
+          `https://bookevents-server.onrender.com/events/payment-succcess/${id}`,
+          { transactionId },
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -23,7 +23,7 @@ const Success = () => {
         if (response.data.status == true) {
           toast.success(response.data.message);
         } else {
-          navigate("/cancel")
+          navigate("/payment/cancel");
           toast.error(response.data.message);
         }
       };
@@ -31,7 +31,7 @@ const Success = () => {
     } catch (error) {
       console.log(error);
     }
-  }, [id, email,navigate,token]);
+  }, [id, transactionId, navigate, token]);
   return (
     <section className="text-gray-600 body-font">
       <div className="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">

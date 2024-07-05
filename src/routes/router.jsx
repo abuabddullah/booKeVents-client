@@ -3,6 +3,7 @@ import BookNow from "../components/maniLayout/BookNow";
 import EventDetails from "../components/maniLayout/EventDetails";
 import MyEvents from "../components/maniLayout/MyEvents";
 import Payment from "../components/maniLayout/Payment";
+import Paymentcancel from "../components/maniLayout/Paymentcancel";
 import Success from "../components/maniLayout/Success";
 import ProtectedRoute from "../components/shared/ProtectedRoute";
 import MainLayout from "../layouts/MainLayout";
@@ -21,7 +22,7 @@ export const router = createBrowserRouter([
         path: "/eventDetails/:id",
         element: <EventDetails />,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/api/v1/events/${params.id}`),
+          fetch(`https://bookevents-server.onrender.com/events/${params.id}`),
         errorElement: <ErrorPage />,
       },
       {
@@ -52,8 +53,14 @@ export const router = createBrowserRouter([
   },
 
   {
-    path: "/success/:id/:email",
+    path: "/payment/success/:transactionId/:id",
     element: <Success />,
+    errorElement: <ErrorPage />,
+  },
+
+  {
+    path: "/payment/cancel",
+    element: <Paymentcancel />,
     errorElement: <ErrorPage />,
   },
 ]);

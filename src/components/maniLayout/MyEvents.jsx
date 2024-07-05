@@ -1,10 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import MyEventsTable from "../my-events/MyEventsTable";
 import LoadingSpinner from "../shared/LoadingSpinner";
 import SectionHeadline from "../shared/SectionHeadline";
 import Breadcrumbs from "./Breadcrumbs";
-import EventCard from "./EventCard";
-import MyEventsTable from "../my-events/MyEventsTable";
 
 const MyEvents = () => {
   const [events, setEvents] = useState([]);
@@ -15,7 +14,7 @@ const MyEvents = () => {
     try {
       const loadEvents = async () => {
         axios
-          .get("http://localhost:5000/api/v1/my-events", {
+          .get("https://bookevents-server.onrender.com/my-events", {
             headers: { Authorization: `Bearer ${token}` },
           })
           .then((res) => {

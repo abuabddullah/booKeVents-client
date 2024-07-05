@@ -15,7 +15,7 @@ const MainLayout = () => {
         <div className="drawer-content flex flex-col">
           {/* Navbar */}
           <div className="w-full">
-            <div className="flex-none lg:hidden">
+            <div className="flex justify-end lg:hidden">
               <label
                 htmlFor="my-drawer-3"
                 aria-label="open sidebar"

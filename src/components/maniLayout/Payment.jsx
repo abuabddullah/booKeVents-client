@@ -17,7 +17,7 @@ const Payment = () => {
     try {
       const loadPayments = async () => {
         axios
-          .get("http://localhost:5000/api/v1/payments", {
+          .get("https://bookevents-server.onrender.com/payments", {
             headers: { Authorization: `Bearer ${token}` },
           })
           .then((res) => {
@@ -40,7 +40,7 @@ const Payment = () => {
   const buyFunction = async () => {
     try {
       const response = await axios.post(
-        `http://localhost:5000/api/v1/events/pay-event/${id}`,
+        `https://bookevents-server.onrender.com/events/pay-event/${id}`,
         {},
         {
           headers: {

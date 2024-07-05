@@ -1,12 +1,30 @@
+import axios from "axios";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import MyEvnTablHeader from "./MyEvnTablHeader";
 
 const MyEventsTable = ({ events }) => {
   const navigate = useNavigate();
+  const token = localStorage.getItem("token");
 
-  const handlePayment = (id) => {
-    navigate(`/payment/${id}`);
+  const handlePayment = async (id) => {
+    // navigate(`/payment/${id}`);
+    try {
+      const response = await axios.post(
+        `https://bookevents-server.onrender.com/events/pay-event/${id}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (response.status === 200) {
+        window.location.href = response.data.url;
+      }
+    } catch (error) {
+      console.error("Error processing payment:", error);
+    }
   };
   return (
     <>

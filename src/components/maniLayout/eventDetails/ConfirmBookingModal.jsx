@@ -21,7 +21,7 @@ const ConfirmBookingModal = ({ eventData }) => {
         alert(
           `Pay for Confirming Booking! You will be charged ${eventData?.price}`
         );
-        navigate(`/payment/${eventData?._id}`);
+        navigate(`/my-events`);
       }
     } else {
       alert("Booking Cancelled!");
