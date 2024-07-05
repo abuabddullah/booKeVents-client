@@ -17,6 +17,7 @@
 - registration by email-pass এর সময় user name db তে set হচ্ছে না
 - multiple event payment by selecting at a time by user
 - multiple payment taking need to handle
+- used force reload at **_booKeVents-client\src\components\maniLayout\eventDetails\ConfirmBookingModal.jsx_**
 
 ## link replacement
 

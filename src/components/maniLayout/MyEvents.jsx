@@ -29,7 +29,7 @@ const MyEvents = () => {
     } catch (error) {
       console.log(error);
     }
-  }, []);
+  }, [token]);
 
   if (loading4Events) {
     return <LoadingSpinner />;
